@@ -22,7 +22,6 @@ function Loader() {
                     .then(storage=>{
                         let t = storage['keys'].find((el)=>el.key===`static_${data.id}`)
                         console.log('key here')
-
                         setUser({...user, ...t})
                     })
                     .catch(err=>{
