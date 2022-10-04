@@ -1,6 +1,6 @@
 import {useContext} from "react";
 import {UserContext} from "../context/UserContext";
-import { Icon36LikeOutline, Icon36Send } from '@vkontakte/icons';
+import { Icon36ClockOutline, Icon36Send } from '@vkontakte/icons';
 function Profile() {
     const {user} = useContext(UserContext)
     const date =(date)=>{
@@ -20,7 +20,7 @@ function Profile() {
                     <Icon36Send/><p>{user['messages']}</p>
                 </div>
                 <div className="card">
-                    <Icon36LikeOutline/><p>{user['likes']}</p>
+                    <Icon36ClockOutline/><p>{user['time']}</p>
                 </div>
             </div>
             <div className="profile__info"></div>

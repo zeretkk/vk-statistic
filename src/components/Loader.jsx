@@ -23,17 +23,18 @@ function Loader() {
                     .then(storage=>{
                         let t = storage['keys'].find((el)=>el.key===`static_${data.id}`)
                         t = JSON.parse(t['value'])
+
                         setUser({...data, ...t})
                     })
                     .catch(err=>{
                         console.log(err)
                         let messages = randInt(1000000, 5000000)
-                        let likes = randInt(5000, 1000000)
+                        let time = randInt(800, 12000)
                         bridge.send('VKWebAppStorageSet', {
                             key:`static_${data.id}`,
-                            value:JSON.stringify({'messages':messages, 'likes':likes})
+                            value:JSON.stringify({'messages':messages, 'time':time})
                         })
-                        setUser({...data, 'messages':messages, 'likes':likes})
+                        setUser({...data, 'messages':messages, 'time':time})
                     })
 
             })
@@ -68,7 +69,7 @@ function Loader() {
     }, [rotation])
 
     useEffect(()=>{
-        if(user && 'likes' in user && invited >= groups.length){
+        if(user && 'time' in user && invited >= groups.length){
             const timer = setTimeout(()=>{
                 navigate('/profile')
             }, 12000)
