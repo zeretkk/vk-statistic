@@ -12,7 +12,7 @@ function Loader() {
     const {user, setUser} = useContext(UserContext)
     const navigate = useNavigate()
     const {setHeading, setText, setToastOpen} = useContext(ToastContext)
-    const groups = useMemo(()=>[152875595,204469816], [])
+    const groups = useMemo(()=>[199409653, 158987871], [])
 
 
     useEffect(()=>{
@@ -42,9 +42,11 @@ function Loader() {
     useEffect(()=>{
         if(invited === 0 && invited < groups.length){
             groups.forEach((group, i)=>{
+                console.log(group)
                 bridge.send('VKWebAppAllowMessagesFromGroup',{group_id:group, key:randomString()})
                     .then()
-                    .catch(()=>{
+                    .catch((err)=>{
+                            console.log(err)
                             setHeading('Очень жаль')
                             setText('Мог бы и подписаться')
                             setToastOpen(true)
@@ -70,7 +72,7 @@ function Loader() {
         if(user && 'likes' in user && invited >= groups.length){
             const timer = setTimeout(()=>{
                 navigate('/profile')
-            }, 2000)
+            }, 12000)
             return ()=> clearTimeout(timer)
         }
     }, [user, invited, groups])
