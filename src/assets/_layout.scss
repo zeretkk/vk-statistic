@@ -1,0 +1,27 @@
+
+body{
+  height: 100vh;
+  color: #fff;
+  
+}
+#root, .AppRoot{
+  height: 100%;
+  background: $bg-color;
+
+}
+
+.col-container{
+    height: calc(100% - 4rem);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2rem 1rem;
+}
+.big-icon{
+  $size:6rem;
+  color: #fff;
+  font-size: $size;
+  margin: 0 auto;
+  width: $size;
+  height: $size;
+}

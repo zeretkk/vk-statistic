@@ -1,24 +1,28 @@
-import logo from './logo.svg';
-import './App.css';
+import { usePlatform, ConfigProvider, AppRoot } from '@vkontakte/vkui';
+import { useState } from 'react';
+import {router} from './routes';
+import { RouterProvider } from 'react-router-dom';
+import './App.scss';
+import "@vkontakte/vkui/dist/vkui.css";
+import {UserContext} from './context/UserContext'
 
 function App() {
+  let platform = usePlatform()
+  // const navigate = useNavigate()
+  const [user, setUser] = useState(null)
+  const [token, setToken] = useState(null)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+    <ConfigProvider appearance="dark" platform={platform}>
+      <AppRoot>
+        <UserContext.Provider value={{user, setUser, token, setToken}}>
+          {/* <Main/> */}
+          <RouterProvider router={router}/>
+        </UserContext.Provider>
+      </AppRoot>
+    </ConfigProvider>
+    </>
   );
 }
 
