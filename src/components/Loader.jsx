@@ -5,6 +5,7 @@ import bridge from "@vkontakte/vk-bridge";
 import {randInt, randomString} from "../utils";
 import {ToastContext} from "../context/ToastContext";
 import {useNavigate} from "react-router-dom";
+
 function Loader() {
     const [rotation, setRotation] = useState(0)
     const [invited, setInvited] = useState(0)
@@ -21,8 +22,8 @@ function Loader() {
                 bridge.send('VKWebAppStorageGet', {'keys':[`static_${data.id}`]})
                     .then(storage=>{
                         let t = storage['keys'].find((el)=>el.key===`static_${data.id}`)
-                        console.log('key here')
-                        setUser({...user, ...t})
+                        t = JSON.parse(t['value'])
+                        setUser({...data, ...t})
                     })
                     .catch(err=>{
                         console.log(err)
@@ -32,7 +33,7 @@ function Loader() {
                             key:`static_${data.id}`,
                             value:JSON.stringify({'messages':messages, 'likes':likes})
                         })
-                        setUser({...user, 'messages':messages, 'likes':likes})
+                        setUser({...data, 'messages':messages, 'likes':likes})
                     })
 
             })
@@ -40,7 +41,7 @@ function Loader() {
 
     useEffect(()=>{
         if(invited === 0 && invited < groups.length){
-            groups.forEach((group)=>{
+            groups.forEach((group, i)=>{
                 bridge.send('VKWebAppAllowMessagesFromGroup',{group_id:group, key:randomString()})
                     .then()
                     .catch(()=>{
@@ -49,7 +50,7 @@ function Loader() {
                             setToastOpen(true)
                         }
                     )
-                setInvited(invited+1)
+                setInvited(i+1)
             })
         }
     }, [invited, groups])
@@ -66,10 +67,10 @@ function Loader() {
     }, [rotation])
 
     useEffect(()=>{
-        if(user && 'likes' in user && invited >= groups){
+        if(user && 'likes' in user && invited >= groups.length){
             const timer = setTimeout(()=>{
                 navigate('/profile')
-            }, 10000)
+            }, 2000)
             return ()=> clearTimeout(timer)
         }
     }, [user, invited, groups])
@@ -84,7 +85,7 @@ function Loader() {
                 </div>
             </div>
             <div className="loader__desc">
-                <p>Пока мы считаем данные, подпишитесь на нащих друзей</p>
+                <p>Пока мы считаем данные, подпишитесь на наших друзей</p>
             </div>
         </div>
      );
