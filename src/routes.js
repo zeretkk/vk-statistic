@@ -1,7 +1,7 @@
 import { createBrowserRouter } from "react-router-dom"
-// import App from "./App"
 import Loader from './components/Loader'
 import Main from './components/Main'
+import Profile from "./components/Profile";
 
 
 export const router = createBrowserRouter( [
@@ -12,5 +12,9 @@ export const router = createBrowserRouter( [
     {
         path:'/load',
         element: <Loader/>
+    },
+    {
+        path:'/profile',
+        element: <Profile/>
     }
 ])

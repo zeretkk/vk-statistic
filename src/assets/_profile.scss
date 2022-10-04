@@ -1,0 +1,32 @@
+.profile{
+  text-align: center;
+}
+.profile__head{
+  img{
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 150px;
+    height: auto;
+  }
+  p{
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+}
+.card{
+  background-color: #fff;
+  color: #000;
+  border-radius: .5rem;
+  margin-bottom: 2rem;
+  padding: 1rem 0;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: row;
+  >div{
+    margin: auto 1rem auto 1rem;
+    color: $bg-color;
+  }
+  p{
+    margin: 0;
+  }
+}
