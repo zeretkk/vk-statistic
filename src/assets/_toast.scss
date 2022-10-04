@@ -1,0 +1,23 @@
+.toast{
+  position: absolute;
+  right: .5rem;
+  top: .5rem;
+  display: flex;
+  flex-direction: column;
+  max-height: 250px;
+  max-width: 400px;
+  background-color: #fff;
+  color: #000000;
+  padding: 0 .5rem;
+  border-radius: .5rem;
+}
+.toast__header{
+  font-weight: bold;
+  //font-size: 1.1rem;
+  line-height: 1;
+  border-bottom: 1px solid $bg-color;
+  span{
+    padding: 0 1rem 0 0;
+    color: $bg-color;
+  }
+}
