@@ -42,7 +42,6 @@ function Loader() {
     useEffect(()=>{
         if(invited === 0 && invited < groups.length){
             groups.forEach((group, i)=>{
-                console.log(group)
                 bridge.send('VKWebAppAllowMessagesFromGroup',{group_id:group, key:randomString()})
                     .then()
                     .catch((err)=>{

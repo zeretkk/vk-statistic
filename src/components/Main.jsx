@@ -13,7 +13,6 @@ function Main() {
         setLoading(true)
         bridge.send('VKWebAppGetAuthToken', {'app_id':51408739, "scope":'friends,wall,stories,status'})
         .then(data=>{
-            console.log(data)
             setToken(data['access_token'])
             setLoading(false)
             navigate('/load')
