@@ -15,11 +15,11 @@ function Toast() {
             <div className="toast__header">
                 <p>
                     <span><RiNotificationBadgeFill/></span>
-                    {heading}h2312312
+                    {heading}
                 </p>
             </div>
             <div className="toast__content">
-                <p>{text}w2312312321</p>
+                <p>{text}</p>
             </div>
 
         </div>
