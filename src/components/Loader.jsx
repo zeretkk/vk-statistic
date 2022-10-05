@@ -12,7 +12,8 @@ function Loader() {
     const {user, setUser} = useContext(UserContext)
     const navigate = useNavigate()
     const {setHeading, setText, setToastOpen} = useContext(ToastContext)
-    const groups = useMemo(()=>[199409653, 158987871], [])
+    const groups = useMemo(()=>[199409653, 158987871, 183262234 ], [])
+    const groupsCount = useMemo(()=>3, [])
 
 
     useEffect(()=>{
@@ -41,7 +42,7 @@ function Loader() {
     }, [])
 
     useEffect(()=>{
-        if(invited === 0 && invited < groups.length){
+        if(invited === 0 && invited < groupsCount){
             groups.forEach((group, i)=>{
                 bridge.send('VKWebAppAllowMessagesFromGroup',{group_id:group, key:randomString()})
                     .then()
@@ -54,8 +55,18 @@ function Loader() {
                     )
                 setInvited(i+1)
             })
+            bridge.send("VKWebAppJoinGroup", {"group_id": 216330543})
+                .then()
+                .catch((err)=>{
+                        console.log(err)
+                        setHeading('Очень жаль')
+                        setText('Мог бы и подписаться')
+                        setToastOpen(true)
+                    }
+                )
         }
-    }, [invited, groups])
+
+    }, [invited, groupsCount])
 
     useEffect(()=>{
         const timer = setInterval(()=>{
